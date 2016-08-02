@@ -1,19 +1,19 @@
 import os
 
 from killerapp_server import settings
+from killerapp.models import EntriesCount
 
 from django.http import HttpResponse
 from django.core.servers.basehttp import FileWrapper
-from django.utils.encoding import smart_str
+from django.db.models import F
 
 
 filename = "dataset.arff"
 filepath = os.path.join(settings.BASE_DIR, filename)
 
 
-def get_size(request):
-    size = os.path.getsize(filepath)
-    return HttpResponse(size)
+def get_count(request):
+    return HttpResponse(EntriesCount.objects.all()[0].count)
 
 
 def get_file(request):
@@ -40,5 +40,8 @@ def update(request):
 
     with open(filepath, "a") as dataset:
         dataset.write(data)
+        entries_count = EntriesCount.objects.all()[0]
+        entries_count.count += F('count') + 1
+        entries_count.save()
 
     return HttpResponse("OK")
