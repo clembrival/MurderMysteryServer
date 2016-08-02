@@ -13,7 +13,7 @@ filepath = os.path.join(settings.BASE_DIR, filename)
 
 
 def get_count(request):
-    return HttpResponse(EntriesCount.objects.all()[0].count)
+    return HttpResponse(str(EntriesCount.objects.all()[0].count))
 
 
 def get_file(request):
