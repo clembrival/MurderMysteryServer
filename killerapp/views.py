@@ -11,19 +11,23 @@ from django.db.models import F
 from django.views.decorators.csrf import csrf_exempt
 
 
+# File storing the training set
 filename = "dataset.arff"
 filepath = os.path.join(settings.BASE_DIR, filename)
 
 
+# Returns the number of entries in the dataset
 def get_count(request):
     return HttpResponse(str(EntriesCount.objects.all()[0].count))
 
 
+# Returns the content of the dataset file
 def get_file(request):
     wrapper = FileWrapper(file(filename))
     return HttpResponse(wrapper, content_type='text/plain')
 
 
+# Adds a given new entry to the dataset
 @csrf_exempt
 def update(request):
 
