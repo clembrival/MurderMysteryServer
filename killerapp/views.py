@@ -1,11 +1,14 @@
 import os
 
+import json
+
 from killerapp_server import settings
 from killerapp.models import EntriesCount
 
 from django.http import HttpResponse
 from django.core.servers.basehttp import FileWrapper
 from django.db.models import F
+from django.views.decorators.csrf import csrf_exempt
 
 
 filename = "dataset.arff"
@@ -21,6 +24,7 @@ def get_file(request):
     return HttpResponse(wrapper, content_type='text/plain')
 
 
+@csrf_exempt
 def update(request):
 
     if request.method != 'POST':
@@ -28,15 +32,17 @@ def update(request):
 
     data = ""
 
-    data += str(request.POST.get('title') + ",")
-    data += str(request.POST.get('year') + ",")
-    data += str(request.POST.get('detective') + ",")
-    data += str(request.POST.get('location') + ",")
-    data += str(request.POST.get('point_of_view') + ",")
-    data += str(request.POST.get('murder_weapon') + ",")
-    data += str(request.POST.get('victim_gender') + ",")
-    data += str(request.POST.get('murderer_gender') + ",")
-    data += str(request.POST.get('average_ratings') + "\n")
+    data_dict = json.loads(request.body)
+
+    data += '"{}",'.format(str(data_dict['title']))
+    data += str(data_dict['year'] + ",")
+    data += '"{}",'.format(str(data_dict['detective']))
+    data += str(data_dict['location'] + ",")
+    data += str(data_dict['point_of_view'] + ",")
+    data += str(data_dict['murder_weapon'] + ",")
+    data += str(data_dict['victim_gender'] + ",")
+    data += str(data_dict['murderer_gender'] + ",")
+    data += str(data_dict['average_ratings'] + "\n")
 
     with open(filepath, "a") as dataset:
         dataset.write(data)
