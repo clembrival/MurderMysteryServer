@@ -6,12 +6,12 @@ import re
 
 class Entry(models.Model):
     title = models.CharField(max_length=100, default='?')
-    year = models.CharField(max_length=4, default='?')
+    year = models.CharField(max_length=5, default='?')
     detective = models.CharField(max_length=24, default='?')
     location = models.CharField(max_length=13, default='?')
     point_of_view = models.CharField(max_length=5, default='?')
     murder_weapon = models.CharField(max_length=10, default='?')
-    victim_gender = models.CharField(max_length=4, default='?')
+    victim_gender = models.CharField(max_length=5, default='?')
     murderer_gender = models.CharField(max_length=5, default='?')
     average_ratings = models.CharField(max_length=4, default='?')
     timestamp = models.DateTimeField(default=timezone.now, blank=False)
