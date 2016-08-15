@@ -19,11 +19,8 @@ def populate():
         entries = dataset.readlines()
 
         for index in range(18, len(entries)):
-            add_entry(entries[index].split(","))
+            print(add_entry(entries[index].split(",")).__unicode__())
 
-    for entry in Entry.objects.all():
-        print(entry)
-        print(entry.timestamp)
 
 
 def add_entry(data):
