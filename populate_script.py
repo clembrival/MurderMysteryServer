@@ -44,5 +44,5 @@ def add_entry(data):
 
 
 if __name__ == '__main__':
-    print "Starting KillerApp population script..."
+    print("Starting KillerApp population script...")
     populate()

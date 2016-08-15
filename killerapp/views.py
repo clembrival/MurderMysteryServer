@@ -14,6 +14,12 @@ filename = "dataset.arff"
 filepath = os.path.join(settings.BASE_DIR, filename)
 
 
+# Returns the number of entries in the database and the id of the last entry
+def get_count(request):
+    return HttpResponse("%s\n%d" % (str(Entry.objects.all().count()),
+                                    Entry.objects.order_by('-id')[0].id))
+
+
 # Returns the timestamp of the newest database entry
 def get_timestamp(request):
     return HttpResponse(str(Entry.objects.order_by('-timestamp')[0].timestamp))
