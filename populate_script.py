@@ -6,14 +6,41 @@ import django
 
 django.setup()
 
-from killerapp.models import EntriesCount
+from killerapp_server import settings
+from killerapp.models import Entry
 
 
 def populate():
-    entries_count = EntriesCount.objects.get_or_create()[0]
-    entries_count.save()
 
-    print "Added initial entries count: %d" % entries_count.count
+    filename = "dataset.arff"
+    filepath = os.path.join(settings.BASE_DIR, filename)
+
+    with open(filepath, "r") as dataset:
+        entries = dataset.readlines()
+
+        for index in range(18, len(entries)):
+            add_entry(entries[index].split(","))
+
+    for entry in Entry.objects.all():
+        print(entry)
+        print(entry.timestamp)
+
+
+def add_entry(data):
+    entry = Entry.objects.get_or_create(title=data[0])[0]
+
+    entry.year = data[1]
+    entry.detective = data[2]
+    entry.location = data[3]
+    entry.point_of_view = data[4]
+    entry.murder_weapon = data[5]
+    entry.victim_gender = data[6]
+    entry.murderer_gender = data[7]
+    entry.average_ratings = data[8]
+
+    entry.save()
+
+    return entry
 
 
 if __name__ == '__main__':
