@@ -19,7 +19,7 @@ def populate():
         entries = dataset.readlines()
 
         for index in range(18, len(entries)):
-            print(add_entry(entries[index].split(",")).__unicode__())
+            print(add_entry(entries[index].split("[,\n\"]")).__unicode__())
 
 
 
