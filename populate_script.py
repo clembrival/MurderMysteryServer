@@ -18,7 +18,7 @@ def populate():
     with open(filepath, "r") as dataset:
         for line in dataset:
             if line[0] == "'" or line[0].isalpha():
-                print(add_entry(line.split("[,]")).__unicode__())
+                print(add_entry(line.split(",")).__unicode__())
 
 
 
