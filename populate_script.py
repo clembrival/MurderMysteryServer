@@ -27,14 +27,14 @@ def add_entry(data):
 
     entry = Entry.objects.get_or_create(title=data[0])[0]
 
-    entry.year = data[1]
+    entry.year = str(data[1])
     entry.detective = data[2]
-    entry.location = data[3]
-    entry.point_of_view = data[4]
-    entry.murder_weapon = data[5]
-    entry.victim_gender = data[6]
-    entry.murderer_gender = data[7]
-    entry.average_ratings = data[8]
+    entry.location = str(data[3])
+    entry.point_of_view = str(data[4])
+    entry.murder_weapon = str(data[5])
+    entry.victim_gender = str(data[6])
+    entry.murderer_gender = str(data[7])
+    entry.average_ratings = str(data[8]).strip("\n")
 
     entry.save()
 
