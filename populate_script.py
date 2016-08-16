@@ -23,8 +23,6 @@ def populate():
 
 
 def add_entry(data):
-    print(data)
-
     entry = Entry.objects.get_or_create(title=data[0])[0]
 
     entry.year = str(data[1])
