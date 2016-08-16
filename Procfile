@@ -1,1 +1,1 @@
-web: gunicorn mysite.wsgi
+web: gunicorn killerapp_server.wsgi
