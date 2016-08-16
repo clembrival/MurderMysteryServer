@@ -16,10 +16,9 @@ def populate():
     filepath = os.path.join(settings.BASE_DIR, filename)
 
     with open(filepath, "r") as dataset:
-        entries = dataset.readlines()
-
-        for index in range(18, len(entries)):
-            print(add_entry(entries[index].split("[,\n]")).__unicode__())
+        for line in dataset:
+            if line[0] == "'" or line[0].isalpha():
+                print(add_entry(line.split("[,]")).__unicode__())
 
 
 
