@@ -19,12 +19,12 @@ class Entry(models.Model):
     def __unicode__(self):
         data = ""
 
-        data += '{},'.format(str(self.title))
+        data += "'{}',".format(str(self.title))
         data += str(self.year + ",")
 
         pattern = re.compile("[ ]+")
         if pattern.search(self.detective):
-            data += '{},'.format(str(self.detective))
+            data += "'{}',".format(str(self.detective))
         else:
             data += str(self.detective + ",")
 
