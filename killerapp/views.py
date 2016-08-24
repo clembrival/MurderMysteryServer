@@ -1,17 +1,9 @@
-import os
 import json
 
-from killerapp_server import settings
 from killerapp.models import Entry
 
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
-
-
-# File storing the initial training set
-filename = "dataset.arff"
-# Path to the training set file
-filepath = os.path.join(settings.BASE_DIR, filename)
 
 
 # Returns the number of entries in the database and the id of the last entry
