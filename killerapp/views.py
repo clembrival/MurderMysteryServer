@@ -34,13 +34,13 @@ def get_new_entries(request):
 
     # If the client has been updated before, return only the newest entries...
     if client_last_update:
-        new_data = "".join([entry.__unicode__() for entry in \
-                            Entry.objects.filter(timestamp__gte=client_last_update)])
+        new_data = "\n".join([entry.__unicode__() for entry in
+                             Entry.objects.filter(timestamp__gte=client_last_update)])
 
     # ... otherwise return all the entries added after the initial training set entries
     else:
-        new_data = "".join([entry.__unicode__() for entry in \
-                            Entry.objects.filter(id__gt=66)])
+        new_data = "\n".join([entry.__unicode__() for entry in
+                             Entry.objects.filter(id__gt=66)])
 
     return HttpResponse(new_data)
 
