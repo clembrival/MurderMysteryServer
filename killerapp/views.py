@@ -38,7 +38,7 @@ def get_new_entries(request):
     # ... otherwise return all the entries added after the initial training set entries
     else:
         new_data = "\n".join([entry.__unicode__() for entry in
-                             Entry.objects.filter(id__gt=66)])
+                             Entry.objects.all()])
 
     return HttpResponse(new_data)
 
